@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:todo_app/screen/todo_list.dart';
 import 'package:todoappusingcrud/screens/add_list.dart';
+import 'package:todoappusingcrud/screens/splashScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     ));
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TodoListPage(),
+      home: SplashScreen(),
     );
   }
 }
