@@ -38,81 +38,89 @@ class _TodoListPageState extends State<TodoListPage> {
           ),
         ),
       ),
-      body: Visibility(
-        visible: isLoading,
-        replacement: RefreshIndicator(
-          onRefresh: fetchTodo,
-          color: Colors.black,
-          child: Visibility(
-            visible: items.isNotEmpty,
-            replacement: Center(
-              child: Text(
-                'No Todo Item',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
-            child: ListView.builder(
-                itemCount: items.length,
-                padding: const EdgeInsets.all(10),
-                itemBuilder: (context, index) {
-                  final item = items[index] as Map;
-                  final id = item['_id'] as String;
-                  return Card(
-                    color: Colors.blue[50],
-                    elevation: 0.5,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.blue.shade400,
-                        child: Text(
-                          '${index + 1}',
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                      ),
-                      textColor: Colors.black,
-                      title: Text(
-                        item['title'],
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                        ),
-                      ),
-                      subtitle: Text(
-                        item['description'],
-                        style: const TextStyle(color: Colors.black45),
-                      ),
-                      trailing: PopupMenuButton(
-                        onSelected: (value) {
-                          if (value == 'edit') {
-                            //open edit page
-                            navigateToEditPage(item);
-                          } else if (value == 'delete') {
-                            //open delete page
-                            deleteById(id);
-                          }
-                        },
-                        itemBuilder: (context) {
-                          return [
-                            const PopupMenuItem(
-                              value: 'edit',
-                              child: Text('Edit'),
-                            ),
-                            const PopupMenuItem(
-                              value: 'delete',
-                              child: Text('Delete'),
-                            ),
-                          ];
-                        },
-                      ),
-                    ),
-                  );
-                }),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/backg.png'),
+            fit: BoxFit.cover,
           ),
         ),
-        child: const Center(
-          child: CircularProgressIndicator(
+        child: Visibility(
+          visible: isLoading,
+          replacement: RefreshIndicator(
+            onRefresh: fetchTodo,
             color: Colors.black,
+            child: Visibility(
+              visible: items.isNotEmpty,
+              replacement: Center(
+                child: Text(
+                  'No Todo Item',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+              child: ListView.builder(
+                  itemCount: items.length,
+                  padding: const EdgeInsets.all(10),
+                  itemBuilder: (context, index) {
+                    final item = items[index] as Map;
+                    final id = item['_id'] as String;
+                    return Card(
+                      color: Colors.blue[50],
+                      elevation: 0.5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blue.shade400,
+                          child: Text(
+                            '${index + 1}',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ),
+                        textColor: Colors.black,
+                        title: Text(
+                          item['title'],
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
+                        ),
+                        subtitle: Text(
+                          item['description'],
+                          style: const TextStyle(color: Colors.black45),
+                        ),
+                        trailing: PopupMenuButton(
+                          onSelected: (value) {
+                            if (value == 'edit') {
+                              //open edit page
+                              navigateToEditPage(item);
+                            } else if (value == 'delete') {
+                              //open delete page
+                              deleteById(id);
+                            }
+                          },
+                          itemBuilder: (context) {
+                            return [
+                              const PopupMenuItem(
+                                value: 'edit',
+                                child: Text('Edit'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'delete',
+                                child: Text('Delete'),
+                              ),
+                            ];
+                          },
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+          ),
+          child: const Center(
+            child: CircularProgressIndicator(
+              color: Colors.black,
+            ),
           ),
         ),
       ),

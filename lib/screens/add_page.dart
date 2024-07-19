@@ -39,39 +39,52 @@ class _AddPageState extends State<AddPage> {
           style: const TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
+      body: Stack(
         children: [
-          TextField(
-            controller: titleController,
-            decoration: const InputDecoration(
-              hintText: 'Title',
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextField(
-            controller: descriptionController,
-            decoration: const InputDecoration(hintText: 'Description'),
-            keyboardType: TextInputType.multiline,
-            minLines: 5,
-            maxLines: 8,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: isEdit ? updateData : submitData,
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                isEdit ? 'Update' : 'Submit',
-                style: TextStyle(fontSize: 20),
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'assets/backg.png'), // Replace with your image path
+                fit: BoxFit.cover,
               ),
             ),
-          )
+          ),
+          ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              TextField(
+                controller: titleController,
+                decoration: const InputDecoration(
+                  hintText: 'Title',
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: descriptionController,
+                decoration: const InputDecoration(hintText: 'Description'),
+                keyboardType: TextInputType.multiline,
+                minLines: 5,
+                maxLines: 8,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: isEdit ? updateData : submitData,
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    isEdit ? 'Update' : 'Submit',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
